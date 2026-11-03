@@ -16,7 +16,7 @@ export default async function Dash() {
       </div>
       <AddNote />
       <div className="space-y-3">
-        {notes.map(n => (
+        {notes.map((n: any) => (
           <div key={n.id} className="bg-white p-4 rounded shadow">
             <p className="font-medium">{n.title}</p>
             <p className="text-sm text-gray-600 mt-1">{n.content}</p>
