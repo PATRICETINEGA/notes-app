@@ -3,6 +3,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import AddNote from '@/components/AddNote'
+import DeleteNoteButton from '@/components/DeleteNoteButton'
 export default async function Dash() {
   const s = await getSession()
   if (!s) redirect('/login')
@@ -17,9 +18,12 @@ export default async function Dash() {
       <AddNote />
       <div className="space-y-3">
         {notes.map((n: any) => (
-          <div key={n.id} className="bg-white p-4 rounded shadow">
-            <p className="font-medium">{n.title}</p>
-            <p className="text-sm text-gray-600 mt-1">{n.content}</p>
+          <div key={n.id} className="bg-white p-4 rounded shadow flex justify-between items-start">
+            <div>
+              <p className="font-medium">{n.title}</p>
+              <p className="text-sm text-gray-600 mt-1">{n.content}</p>
+            </div>
+            <DeleteNoteButton id={n.id} />
           </div>
         ))}
         {notes.length === 0 && <p className="text-gray-500">No notes yet</p>}
